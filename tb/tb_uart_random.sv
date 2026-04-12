@@ -1,5 +1,6 @@
 `timescale 1ns/1ps
 module tb_uart_random();
+    // Testbench signals
     logic clk = 0;
     logic tx_start = 0;
     logic [7:0] tx_data;
@@ -10,44 +11,52 @@ module tb_uart_random();
     integer pass_count = 0;
     integer fail_count = 0;
 
-    // Use SIM_SPEED = 1 for instant simulation
+    // Instantiate DUT
     uart_top #(.SIM_SPEED(1)) dut (.*);
 
-    // 100MHz simulation clock (10ns period)
     always #5 clk = ~clk; 
 
     initial begin
-        $display("--- Starting Fast Random Testbench ---");
+        // --- SELECTIVE VCD GENERATION ---
+        $dumpfile("uart_sim.vcd");
+        
+        // $dumpvars arguments: (level, signal1, signal2, ...)
+        // Level 0 ensures we only get the specific signals listed
+        $dumpvars(0, clk);
+        $dumpvars(0, tx_start);
+        $dumpvars(0, tx_data);
+        $dumpvars(0, dut.serial_wire); // The internal connection between TX and RX
+        $dumpvars(0, rx_data);
+        $dumpvars(0, rx_ready);
+        $dumpvars(0, parity_err);
+        $dumpvars(0, tx_busy);
+        
+        $display("--- Starting Fast Random Testbench (Essential VCD) ---");
         #100;
 
         for (int i = 0; i < 50; i++) begin
-            // 1. Ensure TX is ready
             wait(!tx_busy);
             
-            // 2. Prepare Data
             tx_data = $urandom_range(0, 255);
             scoreboard.push_back(tx_data);
             
-            // 3. Send Data
             @(posedge clk);
             tx_start = 1;
             @(posedge clk);
             tx_start = 0;
 
-            // 4. Wait for Receive with a timeout
             fork : timeout_block
                 begin
                     wait(rx_ready);
                     disable timeout_block;
                 end
                 begin
-                    #2000; // If it doesn't receive in 2000ns, something is wrong
+                    #2000;
                     $display("[FAIL] Transaction %0d: TIMEOUT", i);
                     $finish;
                 end
             join
 
-            // 5. Verify Scoreboard
             if (rx_data === scoreboard.pop_front()) begin
                 $display("[PASS] Transaction %0d: Sent 0x%h, Received 0x%h", i, tx_data, rx_data);
                 pass_count++;
@@ -56,12 +65,13 @@ module tb_uart_random();
                 fail_count++;
             end
             
-            // 6. Mandatory gap for State Machine reset
             repeat(5) @(posedge clk);
         end
 
         $display("--- Final Results ---");
         $display("Total Passed: %0d | Total Failed: %0d", pass_count, fail_count);
+        
+        $dumpoff; 
         $finish;
     end
 endmodule
