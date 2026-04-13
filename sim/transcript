@@ -4,43 +4,43 @@
 # vmap work work 
 # Modifying modelsim.ini
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 03:24:56 on Apr 13,2026
+# Start time: 15:19:04 on Apr 13,2026
 # vlog -sv ../rtl/uart_tx.sv 
 # -- Compiling module uart_tx
 # 
 # Top level modules:
 # 	uart_tx
-# End time: 03:24:56 on Apr 13,2026, Elapsed time: 0:00:00
+# End time: 15:19:04 on Apr 13,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 03:24:56 on Apr 13,2026
+# Start time: 15:19:04 on Apr 13,2026
 # vlog -sv ../rtl/uart_rx.sv 
 # -- Compiling module uart_rx
 # 
 # Top level modules:
 # 	uart_rx
-# End time: 03:24:56 on Apr 13,2026, Elapsed time: 0:00:00
+# End time: 15:19:04 on Apr 13,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 03:24:56 on Apr 13,2026
+# Start time: 15:19:04 on Apr 13,2026
 # vlog -sv ../rtl/uart_top.sv 
 # -- Compiling module uart_top
 # 
 # Top level modules:
 # 	uart_top
-# End time: 03:24:56 on Apr 13,2026, Elapsed time: 0:00:00
+# End time: 15:19:04 on Apr 13,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 03:24:56 on Apr 13,2026
+# Start time: 15:19:04 on Apr 13,2026
 # vlog -sv ../tb/tb_uart_random.sv 
 # -- Compiling module tb_uart_random
 # 
 # Top level modules:
 # 	tb_uart_random
-# End time: 03:24:56 on Apr 13,2026, Elapsed time: 0:00:00
+# End time: 15:19:04 on Apr 13,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vsim -c -do "run -all; quit -f" work.tb_uart_random 
-# Start time: 03:24:56 on Apr 13,2026
+# Start time: 15:19:04 on Apr 13,2026
 # Loading sv_std.std
 # Loading work.tb_uart_random
 # Loading work.uart_top
@@ -103,5 +103,5 @@
 # Total Passed: 50 | Total Failed: 0
 # ** Note: $finish    : ../tb/tb_uart_random.sv(75)
 #    Time: 57595 ns  Iteration: 1  Instance: /tb_uart_random
-# End time: 03:24:56 on Apr 13,2026, Elapsed time: 0:00:00
+# End time: 15:19:05 on Apr 13,2026, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 1
